@@ -36,22 +36,9 @@ public class AlgorithmsController {
     }
 
     @PostMapping(path = "/check_duplicates", consumes = {MediaType.APPLICATION_JSON_VALUE},  produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Boolean> containsDuplicate(@RequestBody List<Integer> numbersList) throws JsonProcessingException {
+    public ResponseEntity<Boolean> containsDuplicate(@RequestBody int[] numbers) {
 
-//        ObjectMapper mapper = new ObjectMapper();
-//        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson= ow.writeValueAsString(numbersList);
-
-        // Todo need to fix this mapping for postman
-        List<Integer> readList = new ObjectMapper().readValue(requestJson, new TypeReference<List<Integer>>() {});
-
-        int[] intNumbers = readList.stream().mapToInt(i -> i).toArray();
-
-        return new ResponseEntity<>(service.containsDuplicate(intNumbers), HttpStatus.OK);
+        return new ResponseEntity<>(service.containsDuplicate(numbers), HttpStatus.OK);
     }
 
 }
