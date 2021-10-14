@@ -56,14 +56,8 @@ public class AlgorithmsControllerIntegrationTest {
 
     @Test
     public void givenSomething_checkDuplicatesInAList() throws Exception {
-        List<Integer> numbers = new ArrayList<>(3);
-        numbers.add(1); numbers.add(1); numbers.add(3);
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson= ow.writeValueAsString(numbers);
         given(service.containsDuplicate(Mockito.any())).willReturn(Boolean.TRUE);
-        mockMvc.perform(post("/algorithms/check_duplicates").contentType(MediaType.APPLICATION_JSON).content(requestJson)).andExpect(status().isOk());
+        mockMvc.perform(post("/algorithms/check_duplicates").contentType(MediaType.APPLICATION_JSON).content("[1,2,3]")).andExpect(status().isOk());
         verify(service, VerificationModeFactory.times(1)).containsDuplicate(Mockito.any());
 
     }
