@@ -37,7 +37,6 @@ public class AlgorithmsController {
 
     @PostMapping(path = "/check_duplicates", consumes = {MediaType.APPLICATION_JSON_VALUE},  produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Boolean> containsDuplicate(@RequestBody int[] numbers) {
-
         return new ResponseEntity<>(service.containsDuplicate(numbers), HttpStatus.OK);
     }
 
