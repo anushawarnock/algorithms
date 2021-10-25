@@ -2,7 +2,6 @@ package com.handeware.algorithms.service;
 
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class AlgorithmServiceImpl implements AlgorithmsService{
@@ -16,16 +15,13 @@ public class AlgorithmServiceImpl implements AlgorithmsService{
     @Override
     public Boolean containsDuplicate(int[] numbers) {
         boolean result = false;
-        try {
-            Set<Integer> numsSet = new HashSet<>(numbers.length);
-            for (int i : numbers) {
-                if (numsSet.contains(i)){
-                    result = true;
-                }
-                numsSet.add(i);
+        Set<Integer> numsSet = new HashSet<>(numbers.length);
+        for (int i : numbers) {
+            if (numsSet.contains(i)) {
+                result = true;
+                return result;
             }
-        } catch (Exception e) {
-            System.out.println("Failed with an exception : "+e);
+            numsSet.add(i);
         }
         return result;
     }
